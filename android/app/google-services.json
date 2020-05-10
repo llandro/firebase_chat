@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "872093273938",
+    "firebase_url": "https://flash-chat-a1675.firebaseio.com",
+    "project_id": "flash-chat-a1675",
+    "storage_bucket": "flash-chat-a1675.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872093273938:android:fa1955b1ab8e7c5d37348b",
+        "android_client_info": {
+          "package_name": "co.llandro.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "872093273938-b9tsjamhoibr1cfc16r7fc67eklk5f5q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeyNmaytRJcSeSHbwoS6s_PFClCJLgMpk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "872093273938-b9tsjamhoibr1cfc16r7fc67eklk5f5q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872093273938:android:7bec323080aef08537348b",
+        "android_client_info": {
+          "package_name": "com.llandro.firebasechat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "872093273938-b9tsjamhoibr1cfc16r7fc67eklk5f5q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeyNmaytRJcSeSHbwoS6s_PFClCJLgMpk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "872093273938-b9tsjamhoibr1cfc16r7fc67eklk5f5q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
