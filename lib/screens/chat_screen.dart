@@ -1,5 +1,8 @@
+import 'package:firebasechat/widgets/chat/new_message.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebasechat/widgets/chat/messages.dart';
 
 class ChatScreen extends StatelessWidget {
   static const routeName = '/chat';
@@ -9,33 +12,50 @@ class ChatScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Chat'),
-      ),
-      body: StreamBuilder(
-        stream: Firestore.instance
-            .collection('chats/uNeOQeyog8rkqByMUYNw/messages')
-            .snapshots(),
-        builder: (ctx, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting)
-            return Center(child: CircularProgressIndicator());
-          final documents = snapshot.data.documents;
-          return ListView.builder(
-            itemBuilder: (ctx, idx) => Container(
-              padding: EdgeInsets.all(8),
-              child: Text(documents[idx]['text']),
-              key: documents[idx]['id'],
+        actions: <Widget>[
+          DropdownButton(
+            icon: Icon(
+              Icons.more_vert,
+              color: Theme.of(context).primaryIconTheme.color,
             ),
-            itemCount: documents.length,
-          );
-        },
+            items: [
+              DropdownMenuItem(
+                child: Container(
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.exit_to_app),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text('Logout'),
+                    ],
+                  ),
+                ),
+                value: 'logout',
+              ),
+            ],
+            onChanged: (id) {
+              if (id == 'logout') FirebaseAuth.instance.signOut();
+            },
+          )
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          Firestore.instance
-              .collection('chats/uNeOQeyog8rkqByMUYNw/messages')
-              .add({'text': 'Test message'});
-        },
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Expanded(child: Messages()),
+            NewMessage(),
+          ],
+        ),
       ),
+//      floatingActionButton: FloatingActionButton(
+//        child: Icon(Icons.add),
+//        onPressed: () {
+//          Firestore.instance
+//              .collection('chats/uNeOQeyog8rkqByMUYNw/messages')
+//              .add({'text': 'Test message'});
+//        },
+//      ),
     );
   }
 }
