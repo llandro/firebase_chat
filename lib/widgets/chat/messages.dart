@@ -2,6 +2,7 @@ import 'package:firebasechat/widgets/chat/message_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebasechat/constants.dart';
 
 class Messages extends StatelessWidget {
   @override
@@ -15,7 +16,7 @@ class Messages extends StatelessWidget {
           );
         return StreamBuilder(
             stream: Firestore.instance
-                .collection('chats/uNeOQeyog8rkqByMUYNw/messages')
+                .collection(chat_path)
                 .orderBy(
                   'timestamp',
                   descending: true,
@@ -31,7 +32,8 @@ class Messages extends StatelessWidget {
                 itemBuilder: (ctx, idx) => MessageBubble(
                   documents[idx]['text'],
                   documents[idx]['userId'] == futureSnapshot.data.uid,
-                  ValueKey(documents[idx].documentID),
+                  documents[idx]['userId'],
+                  key: ValueKey(documents[idx].documentID),
                 ),
                 itemCount: documents.length,
               );
