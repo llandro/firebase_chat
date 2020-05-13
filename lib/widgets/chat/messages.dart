@@ -16,7 +16,9 @@ class Messages extends StatelessWidget {
           );
         return StreamBuilder(
             stream: Firestore.instance
-                .collection(chat_path)
+                .collection('/chats')
+                .document('uNeOQeyog8rkqByMUYNw')
+                .collection('messages')
                 .orderBy(
                   'timestamp',
                   descending: true,

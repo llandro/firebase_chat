@@ -1,3 +1,4 @@
+import 'package:firebasechat/widgets/pickers/user_image_picker.dart';
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
@@ -40,7 +41,7 @@ class _AuthFormState extends State<AuthForm> {
     return Center(
       child: AnimatedContainer(
         duration: Duration(milliseconds: 300),
-        height: isLogin ? 300 : 350,
+        height: isLogin ? 300 : 480,
         child: Card(
           margin: EdgeInsets.all(20),
           child: SingleChildScrollView(
@@ -51,6 +52,7 @@ class _AuthFormState extends State<AuthForm> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
+                    if (!isLogin) UserImagePicker(),
                     TextFormField(
                       key: ValueKey('email'),
                       validator: (value) {
