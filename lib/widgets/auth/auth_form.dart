@@ -1,9 +1,16 @@
+import 'dart:io';
 import 'package:firebasechat/widgets/pickers/user_image_picker.dart';
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
-  final void Function(String email, String password, String username,
-      bool isLogin, BuildContext ctx) submitAuthForm;
+  final void Function(
+    String email,
+    String password,
+    String username,
+    File image,
+    bool isLogin,
+    BuildContext ctx,
+  ) submitAuthForm;
   final bool isLoading;
   AuthForm(
     this.submitAuthForm,
@@ -20,16 +27,30 @@ class _AuthFormState extends State<AuthForm> {
   String _userName = '';
   String _email = '';
   String _password = '';
+  File _pickedImage;
+
+  void _pickImage(File pickedImage) {
+    _pickedImage = pickedImage;
+  }
 
   void _trySubmit() {
     final isValid = _formKey.currentState.validate();
     FocusScope.of(context).unfocus();
+    if (_pickedImage == null && !isLogin) {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text('Please pick an image'),
+        backgroundColor: Theme.of(context).errorColor,
+      ));
+      return;
+    }
+
     if (isValid) {
       _formKey.currentState.save();
       widget.submitAuthForm(
         _email,
         _password,
         _userName,
+        _pickedImage,
         isLogin,
         context,
       );
@@ -41,7 +62,7 @@ class _AuthFormState extends State<AuthForm> {
     return Center(
       child: AnimatedContainer(
         duration: Duration(milliseconds: 300),
-        height: isLogin ? 300 : 480,
+        height: isLogin ? 300 : 490,
         child: Card(
           margin: EdgeInsets.all(20),
           child: SingleChildScrollView(
@@ -52,7 +73,7 @@ class _AuthFormState extends State<AuthForm> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    if (!isLogin) UserImagePicker(),
+                    if (!isLogin) UserImagePicker(_pickImage),
                     TextFormField(
                       key: ValueKey('email'),
                       validator: (value) {
