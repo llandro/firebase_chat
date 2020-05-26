@@ -76,6 +76,9 @@ class _AuthFormState extends State<AuthForm> {
                     if (!isLogin) UserImagePicker(_pickImage),
                     TextFormField(
                       key: ValueKey('email'),
+                      autocorrect: false,
+                      textCapitalization: TextCapitalization.none,
+                      enableSuggestions: false,
                       validator: (value) {
                         if (value.isEmpty || !value.contains('@'))
                           return 'Invalid email address';
@@ -92,6 +95,9 @@ class _AuthFormState extends State<AuthForm> {
                     if (!isLogin)
                       TextFormField(
                         key: ValueKey('username'),
+                        textCapitalization: TextCapitalization.words,
+                        autocorrect: true,
+                        enableSuggestions: false,
                         validator: (val) {
                           if (val.isEmpty || val.trim().length < 3)
                             return 'Username is too short!';
